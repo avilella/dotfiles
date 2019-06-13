@@ -784,7 +784,6 @@ and restores point when done."
   (interactive)
   (insert "import argparse\n")
   (insert "\n")
-  (insert "\n")
   (insert "def main():\n")
   (insert "    parser = argparse.ArgumentParser(description=\"program\")\n")
   (insert "    parser.add_argument(\"-i\", \"--inputfile\", help=\"inputfile\", required=True)\n")
@@ -792,20 +791,26 @@ and restores point when done."
   (insert "    args = parser.parse_args()\n")
   (insert "\n")
   (insert "    if args.debug:\n")
-  (insert "        print \"# DEBUG=1\"\n")
+  (insert "        print(\"# DEBUG=1\")\n")
   (insert "\n")
   (insert "    # Start program\n")
-  (insert "    print \"inputfile is %s\" % args.inputfile\n")
+  (insert "    print(\"inputfile is %s\" % args.inputfile)\n")
   (insert "\n")
+
   (insert "    with open(args.inputfile, \"r\") as f:\n")
   (insert "        for line in f.readlines():\n")
-  (insert "            print line\n")
+  (insert "            print(line)\n")
   (insert "    f.closed\n")
   (insert "\n")
-  (insert "if __name__ == \"__main__\":\n")
-  (insert "    main()\n")
+
+  (insert "if __name__ == \"__main__\":\n")if __name__ == "__main__":
+
+  (insert "    main()\n")    main()
+
   (insert "\n")
-  (insert "1\n")
+
+  (insert "1\n")1
+
   )
 
 (defun pdb-restart ()
