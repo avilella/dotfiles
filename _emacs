@@ -777,6 +777,120 @@ and restores point when done."
   (interactive)
   (goto-char (point-min))
   (insert "#!/usr/bin/python3\n")
+(insert "from __future__ import print_function\n")
+(insert "try:\n")
+(insert "	import subprocess\n")
+(insert "	import sys,os\n")
+(insert "except ImportError:\n")
+(insert "	print('Missing package(s)')\n")
+(insert "	quit()\n")
+)
+
+(defun python-randombool ()
+  "puts in an example re"
+  (interactive)
+(insert "import random\n")
+(insert "    rand = int(random.random()+0.5)\n")
+)
+
+(defun python-sysstderr ()
+  "puts in an example re"
+  (interactive)
+(insert "sys.stderr.write(\"Err\\n\")\n")
+)
+
+(defun python-re ()
+  "puts in an example re"
+  (interactive)
+  (insert "import re\n")
+  (insert "    myreg = re.compile(regex)\n")
+  (insert "    res   = myreg.search(value, re.M|re.I)\n")
+  (insert "    int_match = re.match('[0-9]+', value)\n")
+  (insert "    if int_match:\n")
+  (insert "        return int(int_match.group())\n")
+  (insert "\n")
+)
+
+(defun python-datetime ()
+  "puts in an example datetime"
+  (interactive)
+(insert "import datetime\n")
+(insert "    timestamp = datetime.today().strftime(\"2%3y%m%d_%H%M%S\")\n")
+)
+
+(defun python-time ()
+  "puts in an example time"
+  (interactive)
+  (insert "import sys\n")
+  (insert "import time\n")
+  (insert "    t0 = time.time()\n")
+  (insert "    iters = 1\n")
+  (insert "    total_time = time.time() - t0\n")
+  (insert "    sys.stderr.write(\"* Called {} iters in {:.2f}s\\n\".format(iters, int(total_time)))\n")
+  (insert "    sys.stderr.write(\"* {:7.2f} iters / s\\n\".format(iters / total_time / 1000.0))\n")
+)
+
+(defun python-future ()
+  "puts in an example future import"
+  (interactive)
+  (insert "from __future__ import print_function\n")
+)
+
+(defun python-template ()
+  "puts in an example template"
+  (interactive)
+  (insert "from string import Template\n")
+  (insert "    for data in cart:\n")
+  (insert "        print(t.substitute(data))\n")
+  (insert "    t = Template(\"\$frt x \$second = \$third\")\n")
+)
+
+(defun python-bio ()
+  "puts in an example Bio SeqIO"
+  (interactive)
+  (insert "from Bio import SeqIO\n")
+  (insert "    for seq in SeqIO.parse(args.input, 'fasta'):\n")
+  (insert "        seqstr = str(seq.seq)\n")
+)
+
+(defun python-outdict ()
+  "puts in an example outdict"
+  (interactive)
+(insert "import pandas as pd\n")
+(insert "from collections import OrderedDict\n")
+(insert "    d = OrderedDict()\n")
+(insert "    d['val1'] = [val1s]\n")
+(insert "    d['val2'] = [val2s]\n")
+(insert "    d['unclassified'] = [outliers]\n")
+(insert "    df = pd.DataFrame(d)\n")
+(insert "    df.to_csv(args.statsfile, sep=\"\\t\", index=False)\n")
+)
+
+(defun python-namedtuple ()
+  "puts in an example namedtuple"
+  (interactive)
+(insert "from collections import namedtuple\n")
+(insert "    SummaryStats = namedtuple(\"Stats\",['mean','median','q1','q3','stdev'])\n")
+(insert "    s = SummaryStats(2,2.3,1,3,5)\n")
+(insert "    print(s.mean)\n")
+)
+
+(defun python-namedtuple ()
+  "puts in an example namedtuple"
+  (interactive)
+(insert "import os\n")
+(insert "    if not os.path.exists(args.outdir):\n")
+(insert "        os.makedirs(args.outdir)\n")
+)
+
+(defun python-pickle ()
+  "puts in an example pickle"
+  (interactive)
+(insert "import pickle\n")
+(insert "    with open(pickle_filename, 'wb') as fh:\n")
+(insert "        pickle.dump(seq_dict, fh)\n")
+(insert "    with open(pickle_filename, 'rb') as fh:\n")
+(insert "        pickle.load(infile)\n")
 )
 
 (defun python-argparse ()
@@ -785,16 +899,19 @@ and restores point when done."
   (insert "import argparse\n")
   (insert "\n")
   (insert "def main():\n")
+  (insert "    executable=\"ls\"\n")
   (insert "    parser = argparse.ArgumentParser(description=\"program\")\n")
   (insert "    parser.add_argument(\"-i\", \"--inputfile\", help=\"inputfile\", required=True)\n")
+  (insert "    parser.add_argument(\"-x\", \"--executable\", help=\"executable\", required=False, default=executable)\n")
   (insert "    parser.add_argument(\"-d\", \"--debug\",     help=\"debug\", action=\"store_true\")\n")
+  (insert "    parser.add_argument(\"-v\", \"--verbose\",     help=\"verbose\", action=\"store_true\")\n")
   (insert "    args = parser.parse_args()\n")
   (insert "\n")
   (insert "    if args.debug:\n")
   (insert "        print(\"# DEBUG=1\")\n")
   (insert "\n")
   (insert "    # Start program\n")
-  (insert "    print(\"inputfile is %s\" % args.inputfile)\n")
+  (insert "    sys.stderr.write(\"# inputfile is %s\\n\" % args.inputfile)\n")
   (insert "\n")
 
   (insert "    with open(args.inputfile, \"r\") as f:\n")
@@ -802,16 +919,34 @@ and restores point when done."
   (insert "            print(line)\n")
   (insert "    f.closed\n")
   (insert "\n")
-
-  (insert "if __name__ == \"__main__\":\n")if __name__ == "__main__":
-
-  (insert "    main()\n")    main()
-
+  (insert "if __name__ == \"__main__\":\n")
+  (insert "    main()\n")
   (insert "\n")
-
-  (insert "1\n")1
-
+  (insert "1\n")
   )
+
+(defun python-subprocess ()
+  "puts in an subprocess"
+  (interactive)
+(insert "    # Execution to output\n")
+(insert "    (in_dir_file, in_ext) = os.path.splitext(args.inputfile)\n")
+(insert "    in_dir, in_name = os.path.split(in_dir_file)\n")
+(insert "    out_ext = '.txt'\n")
+(insert "    outfile = os.path.join(in_dir,str(in_name+out_ext))\n")
+(insert "    in_args = \"-l\";\n")
+(insert "    cmd = \" \".join([executable,in_args,args.inputfile]);\n")
+(insert "    p = subprocess.Popen(cmd, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, close_fds=True)\n")
+(insert "    ret = p.stdout.read().decode('utf-8')\n")
+(insert "    outsize = os.path.getsize(outfile)\n")
+)
+
+(defun python-itemgetter ()
+  "puts in an itemgetter"
+  (interactive)
+(insert "from operator import itemgetter\n")
+(insert "    for x in sorted(data, key=itemgetter('key1','key2')):\n")
+(insert "        print(x)\n")
+)
 
 (defun pdb-restart ()
   (interactive)
@@ -847,16 +982,53 @@ and restores point when done."
 ;;(define-key python-mode-map "\C-\M-n" 'python-nav-end-of-block)
 ;;(define-key python-mode-map "\C-\M-p" 'python-nav-beginning-of-block)
 
+(defun python-pandas ()
+  "python pandas trio"
+  (interactive)
+(insert "import numpy as np\n")
+(insert "import pandas as pd\n")
+(insert "import matplotlib.pyplot as plt\n")
+)
 
-(defun ppp ()
+(defun pp1 ()
+  "Places python pdb set_trace"
+  (interactive)
+  (insert "import pdb; pdb.set_trace()\n")
+  (insert "pass; # args.debug=False\n")
+)
+
+(defun pp2 ()
+  "Places python pdb set_trace"
+  (interactive)
+  (insert "    import pdb; pdb.set_trace()\n")
+  (insert "    _debug=False; #args.debug=False\n")
+)
+
+(defun pp1d ()
+  "Places python pdb set_trace"
+  (interactive)
+  (insert "if args.debug:\n")
+  (insert "    import pdb; pdb.set_trace()\n")
+  (insert "    _debug=False; #args.debug=False\n")
+)
+
+(defun pp2d ()
   "Places python pdb set_trace"
   (interactive)
   (insert "    if args.debug:\n")
   (insert "        import pdb; pdb.set_trace()\n")
-  (insert "        DB=None; #args.debug=False\n")
+  (insert "        _debug=False; #args.debug=False\n")
 )
 
-(defun pppp ()
+(defun pp3d ()
+  "Places python pdb set_trace"
+  (interactive)
+  (insert "        if args.debug:\n")
+  (insert "            import pdb; pdb.set_trace()\n")
+  (insert "            _debug=False; #args.debug=False\n")
+)
+
+(defun ippp ()
   "Places python ipdb set_trace"
   (interactive)
   (insert "    import ipdb; ipdb.set_trace()\n")
