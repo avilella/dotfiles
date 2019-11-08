@@ -772,6 +772,13 @@ and restores point when done."
 (setq jedi:setup-keys t)                      ; optional
 (setq jedi:complete-on-dot t)                 ; optional
 
+(defun sep ()
+  "run"
+  (interactive)
+  (insert "########################################\n")
+)
+
+
 (defun python-insert-start ()
   "Places #!..python at the start of the script"
   (interactive)
