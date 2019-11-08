@@ -1045,6 +1045,29 @@ and restores point when done."
   (insert "use warnings;\n")
 )
 
+(defun perl-run ()
+  "run"
+  (interactive)
+  (insert "print STDERR \"#\$cmd\\n\";\n")
+  (insert "\$ret \= \`\$cmd\`;\n")
+)
+
+(defun perl-fileparse ()
+  "fileparse"
+  (interactive)
+  (insert "\$tag = 'bstx' unless (defined \$tag);\n")
+  (insert "my \@suffixlist = ('.bam','.cram');\n")
+  (insert "my (\$name,\$path,\$suffix) = fileparse(\$inputfile,@suffixlist);\n")
+  (insert "\$outdir = \$path unless (defined \$outdir);\n")
+  (insert "my \$outfile = \"\$outdir/\$name.\$tag.bam\";\n")
+)
+
+(defun perl-outfile ()
+  "run"
+  (interactive)
+  (insert "print STDERR \"outfile:\\n\" \. \(-s $outfile\) \. \"\\n\";\n")
+  (insert "print \"$outfile\\n\";\n")
+)
 
 (defun perl-getoptlong ()
   "puts in a Getopt::Long stub"
@@ -1085,7 +1108,7 @@ and restores point when done."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Ubuntu Mono" :foundry "unknown" :slant normal :weight normal :height 120 :width normal)))))
+ '(default ((t (:family "Ubuntu Mono" :foundry "unknown" :slant normal :weight normal :height 110 :width normal)))))
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
